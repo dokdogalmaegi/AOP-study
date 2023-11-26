@@ -108,6 +108,14 @@ public class ExecutionTest {
 
     @Test
     public void typeMatchInternal() throws NoSuchMethodException {
+        pointcut.setExpression("execution(* hello.aop.member.MemberServiceImpl.*(..))");
+
+        Method internalMethod = MemberServiceImpl.class.getMethod("internal", String.class);
+        assertThat(pointcut.matches(internalMethod, MemberServiceImpl.class)).isTrue();
+    }
+
+    @Test
+    public void typeMatchNoSuperTypeMethodFalse() throws NoSuchMethodException {
         pointcut.setExpression("execution(* hello.aop.member.MemberService.*(..))");
 
         Method internalMethod = MemberServiceImpl.class.getMethod("internal", String.class);
