@@ -3,10 +3,7 @@ package hello.aop.order.aop;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.*;
 import org.springframework.core.annotation.Order;
 
 @Slf4j
@@ -44,5 +41,8 @@ public class AspectV6Advice {
         log.info("[return] {} return={}", joinPoint.getSignature(), result);
     }
 
-
+    @AfterThrowing(value = "hello.aop.order.aop.Pointcuts.orderAndService()", throwing = "ex")
+    public void doThrowing(JoinPoint joinPoint, Exception ex) {
+        log.info("[ex] {} message={}", ex);
+    }
 }
