@@ -33,4 +33,10 @@ public class ExecutionTest {
         pointcut.setExpression("execution(public String hello.aop.member.MemberServiceImpl.hello(String))");
         assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
     }
+
+    @Test
+    public void allMatch() {
+        pointcut.setExpression("execution(* *(..))");
+        assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+    }
 }
